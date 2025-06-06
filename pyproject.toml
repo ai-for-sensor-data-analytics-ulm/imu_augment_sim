@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imu_augment_sim"
+version = "0.1.0"
+description = "A physics-based gait-simulation and IMU angle-series augmentation toolkit."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Andreas Spilz", email = "andreas.spilz@googlemail.com"}]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "pyyaml",
+    "opensim",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
