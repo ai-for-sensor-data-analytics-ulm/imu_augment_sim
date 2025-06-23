@@ -1,0 +1,43 @@
+segment_rotations:
+  pelvis: [0, 0, 0, 1]
+  femur_r: [0, 0, 0, 1]
+  tibia_r: [0, 0, 0, 1]
+  calcn_r: [0, 0, 0, 1]
+  toes_r: [0, 0, 0, 1]
+  femur_l: [0, 0, 0, 1]
+  tibia_l: [0, 0, 0, 1]
+  calcn_l: [0, 0, 0, 1]
+  toes_l: [0, 0, 0, 1]
+  torso: [0, 0, 0, 1]
+  head: [0, 0, 0, 1]
+  humerus_r: [0, 0, 0, 1]
+  radius_r: [0, 0, 0, 1]
+  hand_r: [0, 0, 0, 1]
+  humerus_l: [0, 0, 0, 1]
+  radius_l: [0, 0, 0, 1]
+  hand_l: [0, 0, 0, 1]
+
+target_labels:
+  - 1
+  - 1
+  - 2
+  - 2
+  - 3
+  - 3
+
+paths:
+  distribution_parameters: 'example_distribution_parameters.pkl'
+  base_path: '../sample_data/'
+  model: '../opensim_templates/model_with_constraints/restricted_full_body_model.osim'
+  ik_settings: '../opensim_templates/imu_ik_settings.xml'
+  ik_output: '../sample_data/ik_results/'
+  analyzer_settings: '../opensim_templates/analyzer_settings.xml'
+  analyzer_output: '../sample_data/ik_results/'
+  labeling_fcts: 'example_al_rules'
+
+thresholds:
+  ankle_angle_r: 28.7733
+  knee_angle_r: 52.2904
+  hip_adduction_r: 16.2313
+
+
