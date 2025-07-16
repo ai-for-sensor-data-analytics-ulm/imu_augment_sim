@@ -50,7 +50,6 @@ def main():
     example_dataset = ExerciseDataset(data=example_data, labels=example_data_labels, unique_ids=example_data_unique_ids,
                                       samplerate=100, augment_indices=[0, 1])
     # calibrate all segments of all repetitions (optional)
-
     calibrated_data = calibrate_segments(example_dataset.data, example_dataset.available_imu_names, cfg['segment_rotations'])
 
     # either calculate distribution parameters from data...
