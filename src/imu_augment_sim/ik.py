@@ -31,7 +31,7 @@ def create_opensim_file(filepath, filename, data, imu_names, samplerate):
 
     str_data = pd.DataFrame()
     time_increment = 1/samplerate
-    str_data['time'] = np.arange(data.shape[0]/samplerate, step=time_increment)
+    str_data['time'] = np.arange(data.shape[0])* time_increment
     str_data['time'] = str_data['time'].astype(str)
     for imu in imu_names:
         quat_cols = [f"{axis}_{imu}" for axis in ['w', 'i', 'j', 'k']]
