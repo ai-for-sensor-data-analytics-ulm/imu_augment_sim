@@ -162,3 +162,16 @@ class ExerciseDataset:
         """
         return len(self.data)
 
+
+    @property
+    def data(self) -> List[pd.DataFrame]:
+        """Gibt die IMU-Daten zurück."""
+        return self._data
+
+
+    @data.setter
+    def data(self, value: List[pd.DataFrame]) -> None:
+        """Setzt die IMU-Daten und validiert die Spaltenkonvention."""
+        self._data = value
+        self._validate_column_convention()
+

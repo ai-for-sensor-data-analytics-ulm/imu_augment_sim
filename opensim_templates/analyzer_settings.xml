@@ -7,7 +7,7 @@
 
 		<force_set_files />
 
-		<results_directory>../sample_data/ik_results/0_0</results_directory>
+		<results_directory>../sample_data/ik_results/1_5</results_directory>
 
 		<output_precision>8</output_precision>
 
@@ -70,7 +70,7 @@
 
 		<states_file />
 
-		<coordinates_file>../sample_data/ik_results/0_0/ik_imu_orientations.mot</coordinates_file>
+		<coordinates_file>../sample_data/ik_results/1_5/ik_imu_orientations.mot</coordinates_file>
 
 		<speeds_file />
 

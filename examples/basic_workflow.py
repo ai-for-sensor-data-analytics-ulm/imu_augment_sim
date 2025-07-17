@@ -44,23 +44,31 @@ def main():
         cfg = yaml.safe_load(stream)
 
     # load and prepare angle_series
-    example_data, example_data_labels, example_data_unique_ids = load_example_data(Path("../data/example_dataset/CEOD.pkl"))
+    example_data, example_data_labels, example_data_unique_ids = load_example_data(Path("../data/example_dataset/PGAITEX.pkl"), cfg['exercise_identifier'])
 
     # 1. Load dataset
     example_dataset = ExerciseDataset(data=example_data, labels=example_data_labels, unique_ids=example_data_unique_ids,
                                       samplerate=100, augment_indices=[0, 1])
+
+    if cfg['calibrate_segments']:
     # calibrate all segments of all repetitions (optional)
-    calibrated_data = calibrate_segments(example_dataset.data, example_dataset.available_imu_names, cfg['segment_rotations'])
+        example_dataset.data = calibrate_segments(example_dataset.data, example_dataset.available_imu_names, cfg['segment_rotations'])
 
     # either calculate distribution parameters from data...
-    distribution_parameters = calculate_distribution_parameters_from_data(data=calibrated_data,
+    distribution_parameters = calculate_distribution_parameters_from_data(data=example_dataset.data,
                                                         imu_names=example_dataset.available_imu_names,
                                                         labels=example_dataset.labels)
 
     # ...or load them from a file
     # distribution_parameters = pkl.load(open(cfg['paths']['distribution_parameters'], 'rb'))
 
-    for sample, label, uid in zip(example_dataset.data, example_dataset.labels, example_dataset.unique_ids):
+    for i, (sample, label, uid) in enumerate(zip(example_dataset.data, example_dataset.labels, example_dataset.unique_ids)):
+
+        # # remove later
+        # if i < 9:
+        #     continue
+        # # end
+
 
         for i, target_label in enumerate(cfg['target_labels']):
             aug_sample = augment_sample(input_sample=sample,

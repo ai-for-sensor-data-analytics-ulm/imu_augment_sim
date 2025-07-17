@@ -25,6 +25,10 @@ target_labels:
   - 3
   - 3
 
+exercise_identifier: 'resisted_gait_simulation'
+
+calibrate_segments: False
+
 paths:
   distribution_parameters: 'example_distribution_parameters.pkl'
   base_path: '../sample_data/'
