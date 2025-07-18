@@ -76,7 +76,7 @@ def main():
                                         distribution_parameters=distribution_parameters,
                                         target_label=target_label,
                                         no_scaling=False,
-                                        no_shifting=True)
+                                        no_shifting=False)
 
             orientations_file_path = create_opensim_file(filepath=Path(cfg['paths']['ik_output'])  / f'{uid}_{i}',
                                 filename='imu_orientations.sto',
@@ -98,7 +98,8 @@ def main():
             analysis_data = load_analysis_data(orientations_file_path.parent)
 
             # perform automatic labeling
-            evaluator = RuleEvaluator(analysis_data,al_rules, al_logic)
+            evaluator = RuleEvaluator(analysis_data, al_rules, al_logic)
+            evaluator = RuleEvaluator(analysis_data, al_rules, al_logic)
             label, details = evaluator.evaluate()
 
 

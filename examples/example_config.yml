@@ -27,6 +27,7 @@ target_labels:
   - 4
   - 4
 
+#exercise_identifier: 'resisted_dorsiflexion'
 exercise_identifier: 'resisted_gait_simulation'
 
 calibrate_segments: False
@@ -46,5 +47,10 @@ thresholds:
   knee_angle_r: 60.668
   leg_adduction_r: 21.151
   hip_flexion_r: 59.84
+
+#thresholds:
+#  pos_subtalar_r: 13.669
+#  neg_subtalar_r: 7.334
+#  mtp_angle_r: 19.61
 
 
