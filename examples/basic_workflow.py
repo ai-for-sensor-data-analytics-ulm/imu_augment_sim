@@ -76,7 +76,7 @@ def main():
                                         distribution_parameters=distribution_parameters,
                                         target_label=target_label,
                                         no_scaling=False,
-                                        no_shifting=False)
+                                        no_shifting=True)
 
             orientations_file_path = create_opensim_file(filepath=Path(cfg['paths']['ik_output'])  / f'{uid}_{i}',
                                 filename='imu_orientations.sto',

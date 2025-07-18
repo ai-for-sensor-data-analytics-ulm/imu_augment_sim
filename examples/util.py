@@ -19,7 +19,8 @@ def load_example_data(data_path: Path, exercise_identifier:str) -> List[dict]:
         Dictionary containing the loaded example angle_series.
     """
     datastructure = pkl.load(open(data_path , 'rb'))
-    data = [rep['imu_data'] for rep in datastructure['data'] if rep['exercise'] == exercise_identifier]
-    labels = [rep['rating'] for rep in datastructure['data']]
-    metadata = [{'rep_id': rep['repetition_id'], 'm_id':rep['m_id']} for rep in datastructure['data']]
+    exercise_data = [rep for rep in datastructure['data'] if rep['exercise'] == exercise_identifier]
+    labels = [rep['rating'] for rep in exercise_data]
+    data = [rep['imu_data'] for rep in exercise_data]
+    metadata = [{'rep_id': rep['repetition_id'], 'm_id':rep['m_id']} for rep in exercise_data]
     return data, labels, metadata
