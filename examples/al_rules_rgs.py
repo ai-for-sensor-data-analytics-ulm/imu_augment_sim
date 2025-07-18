@@ -23,7 +23,7 @@ def al_logic(results: dict[str, bool]) -> int:
     """
     ha = results['max_range_leg_adduction_below']['boolean']
     kf = results['max_range_knee_flexion_below']['boolean']
-    ad = results['max_range_ankle_dorsiflexion_below']['boolean']
+    ad = results['min_ankle_dorsiflexion_below']['boolean']
     hf = results['max_range_hip_flexion_below']['boolean']
 
     if ha:
@@ -92,6 +92,28 @@ def rule_max_combined_range_below(data: Any, joint_angle_0, joint_angle_1, thres
     max_delta = max(combined_joint_angles) - min(combined_joint_angles)
     return {'boolean': max_delta < threshold, 'max_delta_combined': max_delta}
 
+
+def rule_min_below(data: Any, joint_angle: str, threshold: float) -> bool:
+    """Check if the minimum of a joint angle stays below a threshold.
+
+    Parameters
+    ----------
+    data : Any
+        Analysis data containing joint angles.
+    joint_angle : str
+        Column name of the joint angle to check.
+    threshold : float
+        Maximum allowed minimum value.
+
+    Returns
+    -------
+    bool
+        ``True`` if the minimum value is smaller than ``threshold``.
+    """
+    joint_angles = data['joint_angles']
+    min_value = min(joint_angles[joint_angle])*-1
+    return {'boolean': min_value < threshold, f'min_{joint_angle}': min_value}
+
 al_rules = {
     'max_range_leg_adduction_below': Rule(
         name='max_range_leg_adduction_below',
@@ -103,9 +125,9 @@ al_rules = {
         func=rule_max_range_below,
         kwargs={'joint_angle': 'knee_angle_r', 'threshold': cfg['thresholds']['knee_angle_r']}
     ),
-    'max_range_ankle_dorsiflexion_below': Rule(
-        name='max_range_ankle_dorsiflexion_below',
-        func=rule_max_range_below,
+    'min_ankle_dorsiflexion_below': Rule(
+        name='min_ankle_dorsiflexion_below',
+        func=rule_min_below,
         kwargs={'joint_angle': 'ankle_angle_r', 'threshold': cfg['thresholds']['ankle_angle_r']}
     ),
     'max_range_hip_flexion_below': Rule(
