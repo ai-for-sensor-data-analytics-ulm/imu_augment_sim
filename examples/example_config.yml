@@ -24,6 +24,8 @@ target_labels:
   - 2
   - 3
   - 3
+  - 4
+  - 4
 
 exercise_identifier: 'resisted_gait_simulation'
 
@@ -40,8 +42,9 @@ paths:
   labeling_fcts: 'example_al_rules'
 
 thresholds:
-  ankle_angle_r: 28.7733
-  knee_angle_r: 52.2904
-  hip_adduction_r: 16.2313
+  ankle_angle_r: 19.49
+  knee_angle_r: 60.668
+  leg_adduction_r: 21.151
+  hip_flexion_r: 59.84
 
 

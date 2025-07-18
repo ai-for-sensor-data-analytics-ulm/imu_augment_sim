@@ -3,7 +3,7 @@
 from __future__ import annotations
 import pandas as pd
 from pathlib import Path
-from typing import Callable, Optional, List
+from typing import Callable, Optional, List, Dict, Any
 
 import numpy as np
 
@@ -39,7 +39,7 @@ class ExerciseDataset:
         self,
         data: List[pd.DataFrame],
         labels: List[int],
-        unique_ids: List[int],
+        metadata: Dict[str, Any],
         samplerate: int,
         augment_indices: List[int]=None,
         distribution_idx: List[int] = None,
@@ -62,7 +62,7 @@ class ExerciseDataset:
             Indices used when computing augmentation statistics.
         """
         self.data = data
-        self.unique_ids = unique_ids
+        self.metadata = metadata
         self.samplerate = samplerate
 
         if augment_indices is not None:
