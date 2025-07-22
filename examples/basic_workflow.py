@@ -111,5 +111,7 @@ def main():
             with open(orientations_file_path.parent / f'metadata.json', 'w', encoding='utf-8') as f:
                 json.dump({'label': label, 'details': details, 'target_label': target_label, 'original_rep_id': uid, 'original_m_id': meta['m_id'], 'original_label': original_label}, f, indent=4, default=str)
 
+            del aug_imu_data, evaluator, aug_sample
+
 if __name__ == "__main__":
     main()
