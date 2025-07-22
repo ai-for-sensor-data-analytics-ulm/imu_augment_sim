@@ -11,6 +11,14 @@ python examples/augment_pipeline.py \
 """
 from __future__ import annotations
 
+import sys
+import os
+
+# Füge src/ zum sys.path hinzu
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
 from src.imu_augment_sim.dataset import ExerciseDataset
 from src.imu_augment_sim.preprocessing import calibrate_segments, calculate_distribution_parameters_from_data, convert_to_imu
 from src.imu_augment_sim.augmentation import augment_sample
@@ -21,7 +29,7 @@ from pathlib import Path
 import json
 from util import load_example_data
 import yaml
-from al_rules_rgs import al_rules, al_logic
+from al_rules_rd import al_rules, al_logic
 
 
 # -----------------------------------------------------------------------------
@@ -112,6 +120,7 @@ def main():
                 json.dump({'label': label, 'details': details, 'target_label': target_label, 'original_rep_id': uid, 'original_m_id': meta['m_id'], 'original_label': original_label}, f, indent=4, default=str)
 
             del aug_imu_data, evaluator, aug_sample
+
 
 if __name__ == "__main__":
     main()
