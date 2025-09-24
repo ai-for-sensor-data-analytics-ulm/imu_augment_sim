@@ -5,6 +5,33 @@ import pandas as pd
 import numpy as np
 import opensim as osim
 import xml.etree.ElementTree as ET
+import re
+
+
+def next_folder_name(base_path: str, identifier: str) -> str:
+    """
+    Generate the next folder name for a given identifier.
+
+    Args:
+        base_path (str): Path where the folders are stored.
+        identifier (str): Numeric identifier (e.g., "12" or "123").
+
+    Returns:
+        str: The next folder name (e.g., "123_4").
+    """
+    pattern = re.compile(rf"^{identifier}_(\d+)$")
+    max_num = 0
+
+    for name in os.listdir(base_path):
+        if os.path.isdir(os.path.join(base_path, name)):
+            match = pattern.match(name)
+            if match:
+                num = int(match.group(1))
+                if num > max_num:
+                    max_num = num
+
+    next_num = max_num + 1
+    return f"{identifier}_{next_num}"
 
 
 def create_opensim_file(filepath, filename, data, imu_names, samplerate):

@@ -22,14 +22,14 @@ if src_path not in sys.path:
 from src.imu_augment_sim.dataset import ExerciseDataset
 from src.imu_augment_sim.preprocessing import calibrate_segments, calculate_distribution_parameters_from_data, convert_to_imu
 from src.imu_augment_sim.augmentation import augment_sample
-from src.imu_augment_sim.ik import create_opensim_file, perform_ik
+from src.imu_augment_sim.ik import create_opensim_file, perform_ik, next_folder_name
 from src.imu_augment_sim.labeling import RuleEvaluator
 from src.imu_augment_sim.analysis import load_analysis_data, perform_analysis
 from pathlib import Path
 import json
 from util import load_example_data
 import yaml
-from al_rules_rd import al_rules, al_logic
+from al_rules_rgs import al_rules, al_logic
 
 
 # -----------------------------------------------------------------------------
@@ -79,6 +79,9 @@ def main():
 
 
         for i, target_label in enumerate(cfg['target_labels']):
+
+            folder_name = next_folder_name(base_path=Path(cfg['paths']['ik_output']), identifier=f'{uid}')
+
             aug_sample = augment_sample(input_sample=sample,
                                         imu_names = example_dataset.available_imu_names,
                                         distribution_parameters=distribution_parameters,
@@ -86,7 +89,7 @@ def main():
                                         no_scaling=False,
                                         no_shifting=True)
 
-            orientations_file_path = create_opensim_file(filepath=Path(cfg['paths']['ik_output'])  / f'{uid}_{i}',
+            orientations_file_path = create_opensim_file(filepath=Path(cfg['paths']['ik_output'])  / folder_name,
                                 filename='imu_orientations.sto',
                                 data=aug_sample,
                                 imu_names=example_dataset.available_imu_names,
@@ -106,7 +109,6 @@ def main():
             analysis_data = load_analysis_data(orientations_file_path.parent)
 
             # perform automatic labeling
-            evaluator = RuleEvaluator(analysis_data, al_rules, al_logic)
             evaluator = RuleEvaluator(analysis_data, al_rules, al_logic)
             label, details = evaluator.evaluate()
 

@@ -43,9 +43,9 @@ paths:
   labeling_fcts: 'example_al_rules'
 
 thresholds:
-  ankle_angle_r: 19.49
-  knee_angle_r: 60.668
-  leg_adduction_r: 21.151
+  ankle_angle_r: 19.17
+  knee_angle_r: 60.45
+  leg_adduction_r: 21.96
   hip_flexion_r: 59.84
 
 #thresholds:
