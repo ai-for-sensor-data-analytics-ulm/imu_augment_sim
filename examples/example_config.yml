@@ -27,8 +27,8 @@ target_labels:
   - 4
   - 4
 
-#exercise_identifier: 'resisted_dorsiflexion'
-exercise_identifier: 'resisted_gait_simulation'
+exercise_identifier: 'resisted_dorsiflexion'
+#exercise_identifier: 'resisted_gait_simulation'
 
 calibrate_segments: False
 
@@ -42,15 +42,15 @@ paths:
   analyzer_output: '../sample_data/ik_results/'
   labeling_fcts: 'example_al_rules'
 
-thresholds:
-  ankle_angle_r: 19.17
-  knee_angle_r: 60.45
-  leg_adduction_r: 21.96
-  hip_flexion_r: 59.84
-
 #thresholds:
-#  pos_subtalar_r: 13.669
-#  neg_subtalar_r: 7.334
-#  mtp_angle_r: 19.61
+#  ankle_angle_r: 19.17
+#  knee_angle_r: 60.45
+#  leg_adduction_r: 21.96
+#  hip_flexion_r: 59.84
+
+thresholds:
+  pos_subtalar_r: 12.87
+  neg_subtalar_r: 7.334
+  mtp_angle_r: 19.60
 
 

@@ -29,7 +29,7 @@ from pathlib import Path
 import json
 from util import load_example_data
 import yaml
-from al_rules_rgs import al_rules, al_logic
+from al_rules_rd import al_rules, al_logic
 
 
 # -----------------------------------------------------------------------------
