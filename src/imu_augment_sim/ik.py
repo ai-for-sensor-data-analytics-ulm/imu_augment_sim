@@ -22,6 +22,10 @@ def next_folder_name(base_path: str, identifier: str) -> str:
     pattern = re.compile(rf"^{identifier}_(\d+)$")
     max_num = 0
 
+    # create the base path if it doesn't exist
+    if not os.path.exists(base_path):
+        os.makedirs(base_path, exist_ok=True)
+
     for name in os.listdir(base_path):
         if os.path.isdir(os.path.join(base_path, name)):
             match = pattern.match(name)

@@ -1,11 +1,23 @@
 """Example automatic labelling rules used in :mod:`basic_workflow`."""
 
 from typing import Any, Callable
-from src.imu_augment_sim.labeling import Rule
+from ..src.imu_augment_sim.labeling import Rule
 import yaml
+from pathlib import Path
 
-with open('example_config.yml', 'r') as stream:
+_THIS_DIR = Path(__file__).resolve().parent
+CONFIG_PATH = _THIS_DIR / 'example_config.yml'
+
+with open(CONFIG_PATH, 'r') as stream:
     cfg = yaml.safe_load(stream)
+
+def __convert_string_to_bool(string):
+    if not isinstance(string, str):
+        return string
+    if string.lower() in ['true', '1', 'yes']:
+        return True
+    else:
+        return False
 
 
 def al_logic(results: dict[str, bool]) -> int:
@@ -22,9 +34,9 @@ def al_logic(results: dict[str, bool]) -> int:
         Label generated from the rule combination logic.
     """
 
-    neg_sub = results['max_neg_range_subtalar_below']['boolean']
-    pos_sub = results['max_pos_range_subtalar_below']['boolean']
-    mtp = results['max_range_mtp_below']['boolean']
+    neg_sub = __convert_string_to_bool(results['max_neg_range_subtalar_below']['boolean'])
+    pos_sub = __convert_string_to_bool(results['max_pos_range_subtalar_below']['boolean'])
+    mtp = __convert_string_to_bool(results['max_range_mtp_below']['boolean'])
     neg_sub_value = results['max_neg_range_subtalar_below']['max_neg_range_subtalar_angle_r']
     pos_sub_value = results['max_pos_range_subtalar_below']['max_pos_range_subtalar_angle_r']
 
@@ -58,6 +70,8 @@ def al_logic(results: dict[str, bool]) -> int:
     return rating
 
 
+
+
 def rule_max_range_below(data: Any, joint_angle: str, threshold: float) -> bool:
     """Check if the motion range of ``joint_angle`` stays below ``threshold``.
 
@@ -77,7 +91,7 @@ def rule_max_range_below(data: Any, joint_angle: str, threshold: float) -> bool:
     """
     joint_angles = data['joint_angles']
     max_delta = joint_angles[joint_angle].max() - joint_angles[joint_angle].min()
-    return {'boolean': max_delta < threshold, f'max_delta_{joint_angle}':max_delta}
+    return {'boolean': max_delta > threshold, f'max_delta_{joint_angle}':max_delta}
 
 
 def rule_neg_range(data: Any, joint_angle:str, threshold: float) -> bool:
@@ -99,7 +113,7 @@ def rule_neg_range(data: Any, joint_angle:str, threshold: float) -> bool:
     """
     joint_angles = data['joint_angles']
     neg_range = joint_angles[joint_angle].iloc[0] - min(joint_angles[joint_angle])
-    return {'boolean': neg_range < threshold, f'max_neg_range_{joint_angle}': neg_range}
+    return {'boolean': neg_range > threshold, f'max_neg_range_{joint_angle}': neg_range}
 
 def rule_pos_range(data: Any, joint_angle:str, threshold: float) -> bool:
     """Check if the combined range of multiple joint angles stays below a threshold.
@@ -120,18 +134,18 @@ def rule_pos_range(data: Any, joint_angle:str, threshold: float) -> bool:
     """
     joint_angles = data['joint_angles']
     pos_range = max(joint_angles[joint_angle]) - joint_angles[joint_angle].iloc[0]
-    return {'boolean': pos_range < threshold, f'max_pos_range_{joint_angle}': pos_range}
+    return {'boolean': pos_range > threshold, f'max_pos_range_{joint_angle}': pos_range}
 
 al_rules = {
     'max_neg_range_subtalar_below': Rule(
         name='max_neg_range_subtalar_below',
         func=rule_neg_range,
-        kwargs={'joint_angle': 'subtalar_angle_r', 'threshold': cfg['thresholds']['pos_subtalar_r']}
+        kwargs={'joint_angle': 'subtalar_angle_r', 'threshold': cfg['thresholds']['neg_subtalar_r']}
     ),
     'max_pos_range_subtalar_below': Rule(
         name='max_pos_range_subtalar_below',
         func=rule_pos_range,
-        kwargs={'joint_angle': 'subtalar_angle_r', 'threshold': cfg['thresholds']['neg_subtalar_r']}
+        kwargs={'joint_angle': 'subtalar_angle_r', 'threshold': cfg['thresholds']['pos_subtalar_r']}
     ),
     'max_range_mtp_below': Rule(
         name='max_range_mtp_below',

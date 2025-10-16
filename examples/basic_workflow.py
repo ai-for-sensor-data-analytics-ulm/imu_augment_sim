@@ -112,7 +112,6 @@ def main():
             evaluator = RuleEvaluator(analysis_data, al_rules, al_logic)
             label, details = evaluator.evaluate()
 
-
             # convert to IMU format and save
             aug_imu_data = convert_to_imu(analysis_data['orientations'], example_dataset.available_imu_names)
 

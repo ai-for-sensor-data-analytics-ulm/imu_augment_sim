@@ -102,3 +102,4 @@ sample_data/
 *.pkl
 *.sto
 *.mot
+*.hdf5

@@ -37,9 +37,9 @@ paths:
   base_path: '../sample_data/'
   model: '../opensim_templates/model_with_constraints/restricted_full_body_model.osim'
   ik_settings: '../opensim_templates/imu_ik_settings.xml'
-  ik_output: '../sample_data/ik_results/'
+  ik_output: '/mnt/big_storage/synthesization/rd3/'
   analyzer_settings: '../opensim_templates/analyzer_settings.xml'
-  analyzer_output: '../sample_data/ik_results/'
+  analyzer_output: '/mnt/big_storage/synthesization/rd3/'
   labeling_fcts: 'example_al_rules'
 
 #thresholds:
