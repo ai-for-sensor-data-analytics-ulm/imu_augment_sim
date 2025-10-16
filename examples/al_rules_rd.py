@@ -11,6 +11,7 @@ CONFIG_PATH = _THIS_DIR / 'example_config.yml'
 with open(CONFIG_PATH, 'r') as stream:
     cfg = yaml.safe_load(stream)
 
+
 def __convert_string_to_bool(string):
     if not isinstance(string, str):
         return string
