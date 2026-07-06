@@ -3,8 +3,8 @@
 This repository accompanies the manuscript:
 
 > *Boosting Automatic Exercise Evaluation Through Musculoskeletal Simulation-Based IMU Data Augmentation*  
-> Status: Under review (submitted to Nature Scientific Reports)
-Preprint: https://arxiv.org/abs/2505.24415
+> Status: Under review (submitted to MPDI AI)
+Preprint: [https://arxiv.org/abs/2505.24415](https://arxiv.org/abs/2505.24415)
 
 The repository will be finalized and versioned upon acceptance.
 
