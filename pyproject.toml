@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imu_augment_sim"
+version = "0.1.0"
+description = "A physics-based gait-simulation and IMU angle-series augmentation toolkit."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+authors = [{name = "Andreas Spilz", email = "andreas.spilz@googlemail.com"}]
+# Note: OpenSim is not installable from PyPI; install it via conda
+# (see environment.yml). NumPy is capped below 2.0 for OpenSim 4.4 compatibility.
+dependencies = [
+    "numpy>=1.23,<2.0",
+    "pandas>=2.0,<3.0",
+    "scipy>=1.10,<2.0",
+    "pyyaml>=6.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

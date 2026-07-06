@@ -1,0 +1,14 @@
+name: opensim_scripting_py11
+channels:
+  - opensim-org
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy=1.23.5
+  - opensim=4.4.1
+  - pip
+  - pip:
+      - pandas==2.3.0
+      - scipy==1.15.3
+      - pyyaml==6.0.2

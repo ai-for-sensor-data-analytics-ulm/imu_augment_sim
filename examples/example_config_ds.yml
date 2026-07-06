@@ -1,0 +1,85 @@
+segment_rotations:
+  pelvis: [0, 0, 0, 1]
+  femur_r: [0, 0, 0, 1]
+  tibia_r: [0, 0, 0, 1]
+  calcn_r: [0, 0, 0, 1]
+  toes_r: [0, 0, 0, 1]
+  femur_l: [0, 0, 0, 1]
+  tibia_l: [0, 0, 0, 1]
+  calcn_l: [0, 0, 0, 1]
+  toes_l: [0, 0, 0, 1]
+  torso: [0, 0, 0, 1]
+  head: [0, 0, 0, 1]
+  humerus_r: [0, 0, 0, 1]
+  radius_r: [0, 0, 0, 1]
+  hand_r: [0, 0, 0, 1]
+  humerus_l: [0, 0, 0, 1]
+  radius_l: [0, 0, 0, 1]
+  hand_l: [0, 0, 0, 1]
+
+target_labels:
+  - 1
+
+max_generated_samples: 200
+
+variance_scaling: 3.0
+
+exercise_identifier: 'deep_squat'
+#exercise_identifier: 'hurdle_step_left'
+#exercise_identifier: 'resisted_dorsiflexion'
+#exercise_identifier: 'resisted_gait_simulation'
+
+calibrate_segments: False
+
+no_scaling: True
+no_shifting: True
+
+paths:
+  # null: compute augmentation statistics from the data. Set a path to load pre-computed parameters.
+  distribution_parameters: null
+  base_dataset: 'data/example_dataset.pkl'
+  base_path: '../sample_data/'
+  model: '../opensim_templates/model_with_constraints/Unrestricted_Full_Body_Model.osim'
+  ik_settings: '../opensim_templates/imu_ik_settings.xml'
+  ik_output: '../sample_data/ds'
+  analyzer_settings: '../opensim_templates/analyzer_settings.xml'
+  analyzer_output: '../sample_data/ik_results'
+  labeling_fcts: 'al_rules_ds'
+  progress_file: 'progress_temp_ds.json'
+
+# ds
+thresholds:
+  t_daf: 0.339
+  t_fbh: 55.445
+  t_hog: 17.236
+  t_kaf: 0.152
+  t_nlf: 56.764
+  t_tpt: 44.886
+
+## hs
+#thresholds:
+#  t_hka: 0.375
+#  t_dh: 18.847
+#  t_lme: 27.467
+#  t_lmb: 13.720
+#  t_lmr: 26.088
+#  t_ba: 14.150
+#  t_bv: 2.519
+#  t_dist: 0.426
+
+## rd
+#thresholds:
+#  pos_subtalar_r: 12.87
+#  neg_subtalar_r: 7.334
+#  mtp_angle_r: 19.60
+
+## rgs
+#thresholds:
+#  ankle_angle_r: 19.17
+#  knee_angle_r: 60.45
+#  leg_adduction_r: 21.96
+#  hip_flexion_r: 59.84
+
+
+
+
